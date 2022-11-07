@@ -69,7 +69,7 @@ def alphasMethod():
 
         rgba.putdata(newData)
         rgba.save(f'{folder}/{count}.png', "PNG")
-    print()
+    menu(f'Images have been saved to the folder "{folder}"')
 
 # Random color on a random pixel
 def randomColorMethod(count):
@@ -93,7 +93,7 @@ def randomColorMethod(count):
             random.randint(0,item[2]), item[3])
         rgba.putdata(newData)
         rgba.save(f'{folder}/{a+1}.png', "PNG")
-    print()
+    menu(f'Images have been saved to the folder "{folder}"')
 
 # Add static to image
 def staticMethod(count,intensity):
@@ -111,7 +111,7 @@ def staticMethod(count,intensity):
                 item[2] + random.randint(0,intensity), item[3]))
         rgba.putdata(newData)
         rgba.save(f'{folder}/{a+1}.png', "PNG")
-    print()
+    menu(f'Images have been saved to the folder "{folder}"')
 #endregion
 
 choice = menu("Choose method\n\n1. Alpha (change alpha from 150-255)\n2. Random color (sets a random pixel to a random color)\n3. Static (adds a static to the image)\n\nChoice")
