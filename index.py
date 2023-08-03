@@ -6,7 +6,7 @@ folder = "out"
 # checking if the directory 
 # exist or not.
 if not os.path.exists(folder):
-      
+
     # if the directory is not present 
     # then create it.
     os.makedirs(folder)
@@ -18,7 +18,7 @@ else:
             if os.path.isfile(file_path) or os.path.islink(file_path):
                 os.unlink(file_path)
         except Exception as e:
-            print('Failed to delete %s. Reason: %s' % (file_path, e))
+            print(f'Failed to delete {file_path}. Reason: {e}')
 
 #region menu
 asciiName = """ ::::::::  :::        ::::::::::: :::::::::  :::::::::  :::::::::: :::::::::
@@ -56,17 +56,12 @@ def progressBar(msg,number,outOf):
 # Make images with alphas from 150 to 255
 def alphasMethod():
     printName()
-    count = 0
-    for a in range(155,255):
+    for count, a in enumerate(range(155,255), start=1):
         progressBar("Making images", count, 100)
-        count += 1
         rgba = img.convert("RGBA")
         datas = rgba.getdata()
 
-        newData = []
-        for item in datas:
-            newData.append((item[0], item[1], item[2], a))
-
+        newData = [(item[0], item[1], item[2], a) for item in datas]
         rgba.putdata(newData)
         rgba.save(f'{folder}/{count}.png', "PNG")
     menu(f'Images have been saved to the folder "{folder}"')
@@ -85,7 +80,7 @@ def randomColorMethod(count):
             newData.append(item)
 
         # Picks random pixel to replace
-        ran = random.randint(0,int(len(newData)))
+        ran = random.randint(0, len(newData))
         # Sets the color
         newData[ran]=(
             random.randint(0,item[0]),
@@ -102,13 +97,15 @@ def staticMethod(count,intensity):
         progressBar("Making images", a, count)
         rgba = img.convert("RGBA")
         datas = rgba.getdata()
-        newData = []
-
-        for item in datas:
-            newData.append((
-                item[0] + random.randint(0,intensity),
-                item[1] + random.randint(0,intensity),
-                item[2] + random.randint(0,intensity), item[3]))
+        newData = [
+            (
+                item[0] + random.randint(0, intensity),
+                item[1] + random.randint(0, intensity),
+                item[2] + random.randint(0, intensity),
+                item[3],
+            )
+            for item in datas
+        ]
         rgba.putdata(newData)
         rgba.save(f'{folder}/{a+1}.png', "PNG")
     menu(f'Images have been saved to the folder "{folder}"')
