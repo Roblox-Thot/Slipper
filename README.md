@@ -5,3 +5,6 @@
 
 > [!NOTE]\
 > If you want to mass upload use a decal uploader like [DecalUploader](https://github.com/Roblox-Thot/DecalUploader)
+
+# ­
+Don't use very high numbers for the static as it will make the image more shit
