@@ -99,9 +99,9 @@ def staticMethod(count,intensity):
         datas = rgba.getdata()
         newData = [
             (
-                item[0] + random.randint(0, intensity),
-                item[1] + random.randint(0, intensity),
-                item[2] + random.randint(0, intensity),
+                item[0] + random.randint(-intensity, intensity),
+                item[1] + random.randint(-intensity, intensity),
+                item[2] + random.randint(-intensity, intensity),
                 item[3],
             )
             for item in datas
@@ -109,14 +109,40 @@ def staticMethod(count,intensity):
         rgba.putdata(newData)
         rgba.save(f'{folder}/{a+1}.png', "PNG")
     menu(f'Images have been saved to the folder "{folder}"')
+
+# Remove black with static
+def testMethod(count):
+    printName()
+    for a in range(0,count):
+        progressBar("Making images", a, count)
+        rgba = img.convert("RGBA")
+        datas = rgba.getdata()
+        
+        
+        newData = [
+            (
+                item[0],
+                item[1],
+                item[2],
+                item[3] - (random.randint(200,255)-round((item[0]+item[1]+item[2])/3)),
+            )
+            for item in datas
+        ]
+
+        rgba.putdata(newData)
+        rgba.save(f'{folder}/{a+1}.png', "PNG")
+    menu(f'Images have been saved to the folder "{folder}"')
 #endregion
 
-choice = menu("Choose method\n\n1. Alpha (change alpha from 150-255)\n2. Random color (sets a random pixel to a random color)\n3. Static (adds a static to the image)\n\nChoice")
-if choice == "1":
-    alphasMethod()
-elif choice == "2":
-    randomColorMethod(int(menu("How many images?")))
-elif choice == "3":
-    staticMethod(int(menu("How many images?")),int(menu("How much intensity? (1-255)")))
-else:
-    print("Invalid choice")
+choice = menu("""Choose method\n\n1. Alpha (change alpha from 150-255)\n2. Random color (sets a random pixel to a random color)\n3. Static (adds a static to the image)\n3. Remove "shadows" (Shitty method + static :skull:)\n\nChoice""")
+match choice:
+    case "1":
+        alphasMethod()
+    case "2":
+        randomColorMethod(int(menu("How many images?")))
+    case "3":
+        staticMethod(int(menu("How many images?")),int(menu("How much intensity? (1-255)")))
+    case "3":
+        randomColorMethod(int(menu("How many images?")))
+    case _:
+        print("Invalid choice")
