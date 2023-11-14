@@ -143,6 +143,6 @@ match choice:
     case "3":
         staticMethod(int(menu("How many images?")),int(menu("How much intensity? (1-255)")))
     case "3":
-        randomColorMethod(int(menu("How many images?")))
+        testMethod(int(menu("How many images?")))
     case _:
         print("Invalid choice")
