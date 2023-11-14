@@ -121,9 +121,9 @@ def testMethod(count):
         
         newData = [
             (
-                item[0],
-                item[1],
-                item[2],
+                item[0] + random.randint(-2,2),
+                item[1] + random.randint(-2,2), # Used fo a tiny bit of static
+                item[2] + random.randint(-2,2),
                 item[3] - (random.randint(200,255)-round((item[0]+item[1]+item[2])/3)),
             )
             for item in datas
