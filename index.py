@@ -139,7 +139,7 @@ if __name__ == "__main__":
 
     methods = "Choose method\n\n"
     for x in range(len(methodList)):
-        methods = methods + f'{x+1}. {methodList[x]}\n'
+        methods = f'{methods}{x + 1}. {methodList[x]}\n'
 
     choice = menu(methods+"\nChoice")
     match choice:
