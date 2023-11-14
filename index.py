@@ -111,7 +111,7 @@ def staticMethod(count,intensity):
     menu(f'Images have been saved to the folder "{folder}"')
 
 # Remove black with static
-def testMethod(count):
+def shadowMethod(count):
     printName()
     for a in range(0,count):
         progressBar("Making images", a, count)
@@ -143,6 +143,6 @@ match choice:
     case "3":
         staticMethod(int(menu("How many images?")),int(menu("How much intensity? (1-255)")))
     case "4":
-        testMethod(int(menu("How many images?")))
+        shadowMethod(int(menu("How many images?")))
     case _:
         print("Invalid choice")
