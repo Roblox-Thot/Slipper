@@ -130,7 +130,18 @@ if __name__ == "__main__":
 
     methodFunctions = (Methods(img,folder))
 
-    choice = menu("""Choose method\n\n1. Alpha (change alpha from 150-255)\n2. Random color (sets a random pixel to a random color)\n3. Static (adds a static to the image)\n4. Remove "shadows" (Shitty method + static :skull:)\n\nChoice""")
+    methodList = [
+        "Alpha (change alpha from 150-255)",
+        "Random color (sets a random pixel to a random color)",
+        "Static (adds a static to the image)",
+        "Remove \"shadows\" (Shitty method + static :skull:)"
+    ]
+
+    methods = "Choose method\n\n"
+    for x in range(len(methodList)):
+        methods = methods + f'{x+1}. {methodList[x]}\n'
+
+    choice = menu(methods+"\nChoice")
     match choice:
         case "1":
             methodFunctions.alphasMethod()
