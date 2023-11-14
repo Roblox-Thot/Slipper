@@ -134,7 +134,7 @@ def testMethod(count):
     menu(f'Images have been saved to the folder "{folder}"')
 #endregion
 
-choice = menu("""Choose method\n\n1. Alpha (change alpha from 150-255)\n2. Random color (sets a random pixel to a random color)\n3. Static (adds a static to the image)\n3. Remove "shadows" (Shitty method + static :skull:)\n\nChoice""")
+choice = menu("""Choose method\n\n1. Alpha (change alpha from 150-255)\n2. Random color (sets a random pixel to a random color)\n3. Static (adds a static to the image)\n4. Remove "shadows" (Shitty method + static :skull:)\n\nChoice""")
 match choice:
     case "1":
         alphasMethod()
@@ -142,7 +142,7 @@ match choice:
         randomColorMethod(int(menu("How many images?")))
     case "3":
         staticMethod(int(menu("How many images?")),int(menu("How much intensity? (1-255)")))
-    case "3":
+    case "4":
         testMethod(int(menu("How many images?")))
     case _:
         print("Invalid choice")
