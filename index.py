@@ -85,6 +85,28 @@ class Methods:
             rgba.save(f'{self.folder}/{a+1}.png', "PNG")
 
     # Remove black with static
+    def transStaticMethod(self,count,intensity):
+        printName()
+        for a in range(0,count):
+            progressBar("Making images", a, count)
+            rgba = self.img.convert("RGBA")
+            datas = rgba.getdata()
+            
+            
+            newData = [
+                (
+                    item[0],
+                    item[1],
+                    item[2],
+                    item[3] - random.randint(0, intensity),
+                )
+                for item in datas
+            ]
+
+            rgba.putdata(newData)
+            rgba.save(f'{self.folder}/{a+1}.png', "PNG")
+
+    # Remove black with static
     def shadowMethod(self,count):
         printName()
         for a in range(0,count):
@@ -135,6 +157,7 @@ if __name__ == "__main__":
         "Random color (sets a random pixel to a random color)",
         "Static (adds a static to the image)",
         "Remove \"shadows\" (Shitty method + static :skull:)"
+        "Sransparent static (Shitty method if high intensity)"
     ]
 
     methods = "Choose method\n\n"
@@ -150,10 +173,13 @@ if __name__ == "__main__":
             methodFunctions.randomColorMethod(int(menu("How many images?")))
             menu(f'Images have been saved to the folder "{folder}"')
         case "3":
-            methodFunctions.staticMethod(int(menu("How many images?")),int(menu("How much intensity? (1-255)")))
+            methodFunctions.staticMethod(int(menu("How many images?")),int(menu("(DONT USE HIGH NUMBERS)\n\nHow much intensity? (1-255)")))
             menu(f'Images have been saved to the folder "{folder}"')
         case "4":
             methodFunctions.shadowMethod(int(menu("How many images?")))
+            menu(f'Images have been saved to the folder "{folder}"')
+        case "5":
+            methodFunctions.transStaticMethod(int(menu("How many images?")),int(menu("(DONT USE HIGH NUMBERS)\n\nHow much intensity? (1-255)")))
             menu(f'Images have been saved to the folder "{folder}"')
         case _:
             print("Invalid choice")
