@@ -120,7 +120,7 @@ class Methods:
                     item[0] + random.randint(-1,1),
                     item[1] + random.randint(-1,1), # Used fo a tiny bit of static
                     item[2] + random.randint(-1,1),
-                    item[3] - (random.randint(200,255)-round((item[0]+item[1]+item[2])/3)),
+                    item[3] - (random.randint(250,255)-round((item[0]+item[1]+item[2])/3)),
                 )
                 for item in datas
             ]
@@ -156,8 +156,8 @@ if __name__ == "__main__":
         "Alpha (change alpha from 150-255)",
         "Random color (sets a random pixel to a random color)",
         "Static (adds a static to the image)",
-        "Remove \"shadows\" (Shitty method + static :skull:)"
-        "Sransparent static (Shitty method if high intensity)"
+        "Remove \"shadows\" (Shitty method + static :skull:)",
+        "Transparent static (Shitty method if high intensity)"
     ]
 
     methods = "Choose method\n\n"
