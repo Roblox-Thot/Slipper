@@ -2,7 +2,7 @@ from PIL import Image
 import random, os, math
 
 #region menu
-asciiName = """ ::::::::  :::        ::::::::::: :::::::::  :::::::::  :::::::::: :::::::::
+ascii_name = """ ::::::::  :::        ::::::::::: :::::::::  :::::::::  :::::::::: :::::::::
 :+:    :+: :+:            :+:     :+:    :+: :+:    :+: :+:        :+:    :+:
 +:+        +:+            +:+     +:+    +:+ +:+    +:+ +:+        +:+    +:+
 +#++:++#++ +#+            +#+     +#++:++#+  +#++:++#+  +#++:++#   +#++:++#:
@@ -13,7 +13,7 @@ asciiName = """ ::::::::  :::        ::::::::::: :::::::::  :::::::::  :::::::::
 
 def printName():
     os.system('cls' if os.name == 'nt' else 'clear')
-    print(asciiName)
+    print(ascii_name)
 
 def menu(a):
     printName()
@@ -128,6 +128,28 @@ class Methods:
             rgba.putdata(newData)
             rgba.save(f'{self.folder}/{a+1}.png', "PNG")
 
+    # Remove white with static
+    def lightMethod(self,count):
+        printName()
+        for a in range(0,count):
+            progressBar("Making images", a, count)
+            rgba = self.img.convert("RGBA")
+            datas = rgba.getdata()
+            
+            
+            newData = [
+                (
+                    item[0] + random.randint(-1,1),
+                    item[1] + random.randint(-1,1), # Used fo a tiny bit of static
+                    item[2] + random.randint(-1,1),
+                    item[3] - (random.randint(250,255)-round(255-(item[0]+item[1]+item[2])/3)),
+                )
+                for item in datas
+            ]
+
+            rgba.putdata(newData)
+            rgba.save(f'{self.folder}/{a+1}.png', "PNG")
+
 if __name__ == "__main__":
     file = menu("Image file").replace("\"", "")
 
@@ -150,36 +172,53 @@ if __name__ == "__main__":
             except Exception as e:
                 print(f'Failed to delete {file_path}. Reason: {e}')
 
-    methodFunctions = (Methods(img,folder))
+    method_functions = Methods(img,folder)
 
-    methodList = [
+    method_list = [
         "Alpha (change alpha from 150-255)",
         "Random color (sets a random pixel to a random color)",
         "Static (adds a static to the image)",
         "Remove \"shadows\" (Shitty method + static :skull:)",
+        "Remove \"highlights\" (Shitty method + static :skull:)",
         "Transparent static (Shitty method if high intensity)"
     ]
 
     methods = "Choose method\n\n"
-    for x in range(len(methodList)):
-        methods = f'{methods}{x + 1}. {methodList[x]}\n'
+    for x in range(len(method_list)):
+        methods = f'{methods}{x + 1}. {method_list[x]}\n'
 
     choice = menu(methods+"\nChoice")
     match choice:
         case "1":
-            methodFunctions.alphasMethod()
+            method_functions.alphasMethod()
             menu(f'Images have been saved to the folder "{folder}"')
+
         case "2":
-            methodFunctions.randomColorMethod(int(menu("How many images?")))
+            images = menu("How many images?")
+            method_functions.randomColorMethod(int(images))
             menu(f'Images have been saved to the folder "{folder}"')
+
         case "3":
-            methodFunctions.staticMethod(int(menu("How many images?")),int(menu("(DONT USE HIGH NUMBERS)\n\nHow much intensity? (1-255)")))
+            images = menu("How many images?")
+            intensity = menu("(DONT USE HIGH NUMBERS)\n\nHow much intensity? (1-255)")
+            method_functions.staticMethod(int(images),int(intensity))
             menu(f'Images have been saved to the folder "{folder}"')
+
         case "4":
-            methodFunctions.shadowMethod(int(menu("How many images?")))
+            images = menu("How many images?")
+            method_functions.shadowMethod(int(images))
             menu(f'Images have been saved to the folder "{folder}"')
+
         case "5":
-            methodFunctions.transStaticMethod(int(menu("How many images?")),int(menu("(DONT USE HIGH NUMBERS)\n\nHow much intensity? (1-255)")))
+            images = menu("How many images?")
+            method_functions.lightMethod(int(images))
             menu(f'Images have been saved to the folder "{folder}"')
+
+        case "5":
+            images = menu("How many images?")
+            intensity = menu("(DONT USE HIGH NUMBERS)\n\nHow much intensity? (1-255)")
+            method_functions.transStaticMethod(int(images),int(intensity))
+            menu(f'Images have been saved to the folder "{folder}"')
+
         case _:
             print("Invalid choice")
