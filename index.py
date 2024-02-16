@@ -214,7 +214,7 @@ if __name__ == "__main__":
             method_functions.lightMethod(int(images))
             menu(f'Images have been saved to the folder "{folder}"')
 
-        case "5":
+        case "6":
             images = menu("How many images?")
             intensity = menu("(DONT USE HIGH NUMBERS)\n\nHow much intensity? (1-255)")
             method_functions.transStaticMethod(int(images),int(intensity))
