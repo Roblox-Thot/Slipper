@@ -1,40 +1,65 @@
 from PIL import Image
 import random, os, math
 
-#region menu
-ascii_name = """ ::::::::  :::        ::::::::::: :::::::::  :::::::::  :::::::::: :::::::::
+class Functions:
+    def __init__(self) -> None:
+        self.ascii_name:str = """ ::::::::  :::        ::::::::::: :::::::::  :::::::::  :::::::::: :::::::::
 :+:    :+: :+:            :+:     :+:    :+: :+:    :+: :+:        :+:    :+:
 +:+        +:+            +:+     +:+    +:+ +:+    +:+ +:+        +:+    +:+
 +#++:++#++ +#+            +#+     +#++:++#+  +#++:++#+  +#++:++#   +#++:++#:
-       +#+ +#+            +#+     +#+        +#+        +#+        +#+    +#+
+    +#+ +#+            +#+     +#+        +#+        +#+        +#+    +#+
 #+#    #+# #+#            #+#     #+#        #+#        #+#        #+#    #+#
- ########  ########## ########### ###        ###        ########## ###    ###
-                             Roblox image slipper\n"""
+########  ########## ########### ###        ###        ########## ###    ###
+                            Roblox image slipper\n"""
 
-def printName():
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print(ascii_name)
+    def printName(self) -> None:
+        """Prints the ascii art name (cringe)
+        """
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print(self.ascii_name)
 
-def menu(a):
-    printName()
-    return input(f'{a}: ')
-#endregion
+    def menu(self, text:str) -> str:
+        """Prints the name and gives an input with text
 
-def progressBar(msg,number,outOf):
-    count = math.ceil(((number+1)/outOf)*30)
-    present = math.ceil(((number+1)/outOf)*100)
-    print(f'{msg} (O{"o"*count}f{"_"*(30-count)}) {present}% ', end='\r')
+        Args:
+            text (str): text to show after printing the title
+
+        Returns:
+            str: the return of the input
+        """
+        self.printName()
+        return input(f'{text}: ')
+
+    def progressBar(self, msg:str, number:int, outOf:int) -> None:
+        """Display a progress bar in the console.
+
+        Args:
+            msg (str): A message to display along with the progress bar.
+            number (int): The current progress number.
+            outOf (int): The total number representing completion.
+        """
+        count:int = math.ceil(((number+1)/outOf)*30)
+        present:int = math.ceil(((number+1)/outOf)*100)
+        print(f'{msg} (O{"o"*count}f{"_"*(30-count)}) {present}% ', end='\r')
 
 class Methods:
-    def __init__(self, image, folder) -> None:
+    def __init__(self, image:Image, folder:str) -> None:
+        """Method class holding all the methods used
+
+        Args:
+            image (Image): image to be used by any method
+            folder (str): the path to the folder to contain the images
+        """
         self.img = image
         self.folder = folder
+        self.func = Functions()
 
-    # Make images with alphas from 150 to 255
-    def alphasMethod(self):
-        printName()
+    def alphasMethod(self) -> None:
+        """Makes images with alphas from 150 to 250
+        """
+        self.func.printName()
         for count, a in enumerate(range(155,255), start=1):
-            progressBar("Making images", count, 100)
+            self.func.progressBar("Making images", count, 100)
             rgba = self.img.convert("RGBA")
             datas = rgba.getdata()
 
@@ -42,11 +67,15 @@ class Methods:
             rgba.putdata(newData)
             rgba.save(f'{self.folder}/{count}.png', "PNG")
 
-    # Random color on a random pixel
-    def randomColorMethod(self,count):
-        printName()
-        for a in range(0,count):
-            progressBar("Making images", a, count)
+    def randomColorMethod(self, count:int) -> None :
+        """Makes images with one random pixel set to a random color
+
+        Args:
+            count (int): the amount of images to make
+        """
+        self.func.printName()
+        for a in range(count):
+            self.func.progressBar("Making images", a, count)
             rgba = self.img.convert("RGBA")
             datas = rgba.getdata()
 
@@ -66,10 +95,10 @@ class Methods:
             rgba.save(f'{self.folder}/{a+1}.png', "PNG")
 
     # Add static to image
-    def staticMethod(self,count,intensity):
-        printName()
-        for a in range(0,count):
-            progressBar("Making images", a, count)
+    def staticMethod(self, count:int, intensity:int) -> None :
+        self.func.printName()
+        for a in range(count):
+            self.func.progressBar("Making images", a, count)
             rgba = self.img.convert("RGBA")
             datas = rgba.getdata()
             newData = [
@@ -84,11 +113,16 @@ class Methods:
             rgba.putdata(newData)
             rgba.save(f'{self.folder}/{a+1}.png', "PNG")
 
-    # Remove black with static
-    def transStaticMethod(self,count,intensity):
-        printName()
-        for a in range(0,count):
-            progressBar("Making images", a, count)
+    def transStaticMethod(self, count:int, intensity:int) -> None :
+        """Make static with the alpha channel
+
+        Args:
+            count (int): the amount of images to make
+            intensity (int): how much alpha to apply
+        """
+        self.func.printName()
+        for a in range(count):
+            self.func.progressBar("Making images", a, count)
             rgba = self.img.convert("RGBA")
             datas = rgba.getdata()
             
@@ -106,11 +140,15 @@ class Methods:
             rgba.putdata(newData)
             rgba.save(f'{self.folder}/{a+1}.png', "PNG")
 
-    # Remove black with static
-    def shadowMethod(self,count):
-        printName()
-        for a in range(0,count):
-            progressBar("Making images", a, count)
+    def shadowMethod(self, count:int) -> None :
+        """Removes the black parts of an image
+
+        Args:
+            count (int): the amount of images to make
+        """
+        self.func.printName()
+        for a in range(count):
+            self.func.progressBar("Making images", a, count)
             rgba = self.img.convert("RGBA")
             datas = rgba.getdata()
             
@@ -128,11 +166,15 @@ class Methods:
             rgba.putdata(newData)
             rgba.save(f'{self.folder}/{a+1}.png', "PNG")
 
-    # Remove white with static
-    def lightMethod(self,count):
-        printName()
-        for a in range(0,count):
-            progressBar("Making images", a, count)
+    def lightMethod(self,count:int) -> None :
+        """Remove the whites with static for diff hashes
+
+        Args:
+            count (int): the amount of images to make
+        """
+        self.func.printName()
+        for a in range(count):
+            self.func.progressBar("Making images", a, count)
             rgba = self.img.convert("RGBA")
             datas = rgba.getdata()
             
@@ -151,30 +193,31 @@ class Methods:
             rgba.save(f'{self.folder}/{a+1}.png', "PNG")
 
 if __name__ == "__main__":
-    file = menu("Image file").replace("\"", "")
+    FUNCS:Functions = Functions()
+    FILE:str = FUNCS.menu("Image file").replace("\"", "")
 
-    img = Image.open(file)
+    img:Image = Image.open(FILE)
 
-    if menu("Resize? (y/n)") == "y":
-        size = menu("Size (x,y): ").split(",")
+    if FUNCS.menu("Resize? (y/n)") == "y":
+        size = FUNCS.menu("Size (x,y): ").split(",")
         img = img.resize((int(size[0]),int(size[1])))
 
-    folder = "out"
+    FOLDER:str = "out"
 
-    if not os.path.exists(folder):
-        os.makedirs(folder)
+    if not os.path.exists(FOLDER):
+        os.makedirs(FOLDER)
     else:
-        for filename in os.listdir(folder):
-            file_path = os.path.join(folder, filename)
+        for filename in os.listdir(FOLDER):
+            file_path = os.path.join(FOLDER, filename)
             try:
                 if os.path.isfile(file_path) or os.path.islink(file_path):
                     os.unlink(file_path)
             except Exception as e:
                 print(f'Failed to delete {file_path}. Reason: {e}')
 
-    method_functions = Methods(img,folder)
+    method_functions:Methods = Methods(img,FOLDER)
 
-    method_list = [
+    method_list:list = [
         "Alpha (change alpha from 150-255)",
         "Random color (sets a random pixel to a random color)",
         "Static (adds a static to the image)",
@@ -183,42 +226,43 @@ if __name__ == "__main__":
         "Transparent static (Shitty method if high intensity)"
     ]
 
-    methods = "Choose method\n\n"
+    methods:str = "Choose method\n\n"
     for x in range(len(method_list)):
         methods = f'{methods}{x + 1}. {method_list[x]}\n'
 
-    choice = menu(methods+"\nChoice")
+    choice:str = FUNCS.menu(methods+"\nChoice")
     match choice:
         case "1":
             method_functions.alphasMethod()
-            menu(f'Images have been saved to the folder "{folder}"')
+            FUNCS.menu(f'Images have been saved to the folder "{FOLDER}"')
 
         case "2":
-            images = menu("How many images?")
+            images = FUNCS.menu("How many images?")
             method_functions.randomColorMethod(int(images))
-            menu(f'Images have been saved to the folder "{folder}"')
+            FUNCS.menu(f'Images have been saved to the folder "{FOLDER}"')
 
         case "3":
-            images = menu("How many images?")
-            intensity = menu("(DONT USE HIGH NUMBERS)\n\nHow much intensity? (1-255)")
+            images = FUNCS.menu("How many images?")
+            intensity = FUNCS.menu("(DONT USE HIGH NUMBERS)\n\nHow much intensity? (1-255)")
             method_functions.staticMethod(int(images),int(intensity))
-            menu(f'Images have been saved to the folder "{folder}"')
+            FUNCS.menu(f'Images have been saved to the folder "{FOLDER}"')
 
         case "4":
-            images = menu("How many images?")
+            images = FUNCS.menu("How many images?")
             method_functions.shadowMethod(int(images))
-            menu(f'Images have been saved to the folder "{folder}"')
+            FUNCS.menu(f'Images have been saved to the folder "{FOLDER}"')
 
         case "5":
-            images = menu("How many images?")
+            images = FUNCS.menu("How many images?")
             method_functions.lightMethod(int(images))
-            menu(f'Images have been saved to the folder "{folder}"')
+            FUNCS.menu(f'Images have been saved to the folder "{FOLDER}"')
 
         case "6":
-            images = menu("How many images?")
-            intensity = menu("(DONT USE HIGH NUMBERS)\n\nHow much intensity? (1-255)")
+            images = FUNCS.menu("How many images?")
+            intensity = FUNCS.menu("(DONT USE HIGH NUMBERS)\n\nHow much intensity? (1-255)")
             method_functions.transStaticMethod(int(images),int(intensity))
-            menu(f'Images have been saved to the folder "{folder}"')
+            FUNCS.menu(f'Images have been saved to the folder "{FOLDER}"')
 
         case _:
             print("Invalid choice")
+            input("Press enter to exit")
