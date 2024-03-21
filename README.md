@@ -5,4 +5,4 @@
 > You need some form of PIL (Python Image Library) installed for this to work if you are using the source code and not the Exe in releases
 
 > [!NOTE]\
-> If you want to mass upload use a decal uploader like [DecalUploader](https://github.com/Roblox-Thot/DecalUploader)
+> If you want to mass upload use a decal uploader like [DecalUploaderV2](https://github.com/Roblox-Thot/DecalUploaderV2)
