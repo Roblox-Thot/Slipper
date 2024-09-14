@@ -7,15 +7,21 @@
 > [!NOTE]\
 > If you want to mass upload use a decal uploader like [DecalUploaderV2](https://github.com/Roblox-Thot/DecalUploaderV2)
 
-# Mehthods
-> Alpha (change alpha from 150-255)
-> 
-> Random color (sets a random pixel to a random color)
-> 
-> Static (adds a static to the image)
-> 
-> Remove "shadows" (Shitty method + static \:skull:)
-> 
-> Remove "highlights" (Shitty method + static \:skull:)
-> 
-> Transparent static (Shitty method if high intensity)
+# Methods
+Alpha
+> Makes images with alphas from 150 to 250
+
+Random color
+> Makes images with one random pixel set to a random color
+
+Static
+> Adds a static overlay to the image with the given transparency
+ 
+Transparent static
+> Makes static using the transparency
+
+Remove "shadows"
+> This is a shitty method that removes the black parts of the image (to put image on black stuff like torso)
+
+Remove "highlights"
+> This is a shitty method that removes the white parts of the image (to put image on white stuff like torso)
